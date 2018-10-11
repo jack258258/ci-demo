@@ -30,4 +30,4 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run tests!
-      - run: override: ./node_modules/.bin/mocha
+      - run: npm mocha
