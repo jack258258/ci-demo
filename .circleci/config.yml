@@ -1,4 +1,12 @@
 version: 2
+machine:
+  # 環境改成 docker
+  services:
+    - docker
+  dependencies:
+    override:
+      # 建構方式使用 docker build
+      - docker build -t ci-test .
 jobs:
   build:
     docker:
@@ -31,3 +39,7 @@ jobs:
         
       # run tests!
       - run: npm test
+        
+      - run:  docker run -d -p 3000:3000 hello-ci-workflow; sleep 10
+      - run:  curl --retry 10 --retry-delay 5 -v http://localhost:3000
+
